@@ -12,7 +12,9 @@ use_frameworks!
 
 target 'TwitterClient' do
 
+  pod 'Log'
   pod 'RealmSwift'
+  pod 'SVProgressHUD'
 
 end
 
