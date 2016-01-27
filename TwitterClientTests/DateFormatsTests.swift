@@ -23,7 +23,7 @@ class DateFormatsTests: XCTestCase {
     
     func testConstants() {
         XCTAssertEqual(DateFormats.kDefault, "yyyy-MM-dd' 'HH:mm:ss", "The default date format is invalid.")
-        XCTAssertEqual(DateFormats.kISO8601, "yyyy-MM-dd'T'HH:mm:ssZ", "The iso8601 date format is invalid.")
+        XCTAssertEqual(DateFormats.kISO8601, "yyyy-MM-dd'T'HH:mm:ssZ", "The ISO8601 date format is invalid.")
         XCTAssertEqual(DateFormats.kSimple, "yyyy-MM-dd", "The simple date format is invalid.")
     }
     

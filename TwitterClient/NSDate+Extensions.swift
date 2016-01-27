@@ -17,7 +17,7 @@ extension NSDate {
     }
     
     var ISO8601StringValue: String? {
-        let dateFormatter = NSDateFormatter.iso8601DateFormatter
+        let dateFormatter = NSDateFormatter.ISO8601DateFormatter
         let string = dateFormatter.stringFromDate(self)
         return string
     }
