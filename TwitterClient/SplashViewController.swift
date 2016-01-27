@@ -66,16 +66,33 @@ class SplashViewController: UIViewController {
     
     // MARK: - Data
     
+    /**
+    Fetches all the new tweets since the last tweet.
+    If there are no tweets in the database, then we fetch all tweets since 24hrs ago.
+    */
     private func fetchNewTweets() {
         if let user = user {
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), { () -> Void in
-                var since = TweetModelService.tweets().first?.createdDate
-                since = nil == since ? NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: .MatchNextTime) : since
-                if let since = since {
-                    TweetModelService.fetchNewTweetsSinceDate(since, forUser: user, completion: { (error, tweets) -> () in
-                        Log.trace("Error: \(error), Tweets: \(tweets)")
-                    })
+                // [BS] Jan 27, 2016
+                // First, we declare a closure to be used later.
+                // This closure simply fetches the new tweets based on a given date.
+                let performFetch = { (since: NSDate?) -> Void in
+                    if let since = since {
+                        TweetModelService.fetchNewTweetsSinceDate(since, forUser: user, completion: { (error, tweets) -> () in
+                            Log.trace("Error: \(error), Tweets: \(tweets)")
+                        })
+                    }
                 }
+                
+                // [BS] Jan 27, 2016
+                // We get the last tweet's date, otherwise, we create one with -24hrs
+                var since = TweetModelService.tweets().first?.createdDate
+                guard since != nil else {
+                    since = NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: .MatchNextTime)
+                    performFetch(since)
+                    return
+                }
+                performFetch(since)
             })
         }
     }
