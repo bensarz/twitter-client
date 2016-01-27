@@ -13,12 +13,12 @@ class User: Object {
     
     // MARK: - Properties
     
-    dynamic var email              = ""
-    dynamic var firstName          = ""
-    dynamic var id                 = 0
-    dynamic var lastName           = ""
-    dynamic var password           = ""
-    dynamic var username           = ""
+    dynamic var email     = ""
+    dynamic var firstName = ""
+    dynamic var id        = 0
+    dynamic var lastName  = ""
+    dynamic var password  = ""
+    dynamic var username  = ""
     
     // MARK: - Initialization
     
@@ -43,8 +43,8 @@ class User: Object {
 // MARK: - Utilities
 
 extension User {
-    
-    private enum ParsingKey: String {
+
+    enum ParsingKey: String {
         case Email     = "email"
         case FirstName = "first_name"
         case ID        = "id"
