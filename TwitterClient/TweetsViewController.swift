@@ -17,14 +17,30 @@ class TweetsViewController: UIViewController {
     
     // MARK: - Properties
     
+    var token: NSObject?
     var tweets = [Tweet]()
     var user: User?
+    
+    // MARK: - Initialization
+    
+    deinit {
+        if let token = self.token {
+            TweetModelService.removeNotificationBlockIdentifiedByToken(token)
+        }
+        self.token = nil
+    }
     
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.setHidesBackButton(true, animated: false)
+        token = TweetModelService.addNotificationBlock { () -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tableView.reloadData()
+                Log.debug("Table view reloaded")
+            })
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

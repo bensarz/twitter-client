@@ -148,11 +148,13 @@ class PersistenceController {
     // MARK: - Notifications
     
     /**
-    Adds a notification block to Realm's notification system.
+    Adds a notification block to Realm's notification system. The returned object acts as an opaque object used as an identification token.
+    We return an `NSObject` here to keep the fact that we're using Realm internal to this class. The notification block will be executed
+    as long as a reference is held to this token object. You must persist this token and it must be used to remove the notification block.
     
     - parameter block: The block to execute when a notification is posted.
     
-    - returns: An opaque object identifying the notification block. You must persist this token and it must be used to remove the notification block.
+    - returns: An opaque object identifying the notification block.
     */
     class func addNotificationBlock(block: (() -> ())) -> NSObject {
         return realm?.addNotificationBlock({ (notification, realm) -> Void in
