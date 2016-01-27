@@ -37,8 +37,8 @@ class TweetsViewController: UIViewController {
         navigationItem.setHidesBackButton(true, animated: false)
         token = TweetModelService.addNotificationBlock { () -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.tweets = TweetModelService.tweets()
                 self.tableView.reloadData()
-                Log.debug("Table view reloaded")
             })
         }
     }
@@ -53,13 +53,37 @@ class TweetsViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
+    // MARK: - Segues
+    
+    private enum SegueID: String {
+        case PresentCompose = "SegueIDPresentCompose"
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segue.identifier ?? "" {
+        case SegueID.PresentCompose.rawValue:
+            let composeTweetViewController = segue.destinationViewController as? ComposeTweetViewController
+            composeTweetViewController?.completion = { (tweet) -> Void in
+                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), { () -> Void in
+                    if let user = UserModelService.existingUser(), let tweet = tweet {
+                        TweetModelService.postNewTweet(tweet, forUser: user, completion: { (error, tweet) -> () in
+                            Log.debug("YAY!")
+                        })
+                    }
+                })
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
+        default:
+            break
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func composeButtonTapped(sender: UIBarButtonItem) {
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-        let alertController = UIAlertController(title: "Not Available.", message: "This functionality will be available shortly.", preferredStyle: .Alert)
-        alertController.addAction(okAction)
-        presentViewController(alertController, animated: true, completion: nil)
+        performSegueWithIdentifier(SegueID.PresentCompose.rawValue, sender: nil)
     }
     
     @IBAction func logoutButtonTapped(sender: UIBarButtonItem) {

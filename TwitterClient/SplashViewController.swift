@@ -11,15 +11,10 @@ import UIKit
 
 class SplashViewController: UIViewController {
     
-    // MARK: - Properties
-    
-    var user: User?
-    
     // MARK: - Initialization
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        user = UserModelService.existingUser()
         fetchNewTweets()
     }
     
@@ -27,7 +22,7 @@ class SplashViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        guard let _ = user else {
+        guard let _ = UserModelService.existingUser() else {
             performSegueWithIdentifier(SegueID.PresentLoginOptions.rawValue, sender: nil)
             return
         }
@@ -46,19 +41,13 @@ class SplashViewController: UIViewController {
         case SegueID.PresentLoginOptions.rawValue:
             let loginViewController = segue.destinationViewController as? LoginViewController
             loginViewController?.completion = { (error, user) -> Void in
-                self.user = user
                 self.fetchNewTweets()
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         case SegueID.PresentTweets.rawValue:
             let tweetsViewController = segue.destinationViewController as? TweetsViewController
             tweetsViewController?.tweets = TweetModelService.tweets()
-            tweetsViewController?.user = user
-            
-            // [BS] Jan 27, 2016
-            // We have to set this variable to nil in order to allow for a propper logout.
-            // This is very bad. This mechanism needs to be revisited but for the sake of time...
-            user = nil
+            tweetsViewController?.user = UserModelService.existingUser()
         default:
             break
         }
@@ -71,7 +60,7 @@ class SplashViewController: UIViewController {
     If there are no tweets in the database, then we fetch all tweets since 24hrs ago.
     */
     private func fetchNewTweets() {
-        if let user = user {
+        if let user = UserModelService.existingUser() {
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), { () -> Void in
                 // [BS] Jan 27, 2016
                 // First, we declare a closure to be used later.

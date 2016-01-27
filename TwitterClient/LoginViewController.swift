@@ -70,16 +70,13 @@ class LoginViewController: UIViewController {
                         SVProgressHUD.showErrorWithStatus(error.localizedDescription)
                     })
                 } else if let user = user {
-                    let username = user.username
+                    // [BS] Jan 26, 2016
+                    // At this point, we're only going to allow the user to leave this screen
+                    // if he/she has succesfully logged in.
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         SVProgressHUD.showSuccessWithStatus("Success!")
-                        // [BS] Jan 26, 2016
-                        // At this point, we're only going to allow the user to leave this screen
-                        // if he/she has succesfully logged in.
-                        // We're also fetching the user again since we're on a different thread.
-                        let user = UserModelService.userWithUsername(username)
-                        self.completion?(error: nil, user: user)
                     })
+                    self.completion?(error: nil, user: user)
                 } else {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         SVProgressHUD.showErrorWithStatus("A terrible error occurred.")

@@ -49,8 +49,39 @@ class TwitterNetworkService {
         }
     }
     
+    /**
+     Fetches new tweets since a given date for a given user.
+     
+     - parameter date:       The date to use as baseline.
+     - parameter user:       The user that tweeted the tweets.
+     - parameter completion: The completion closure that is called when the operation completes.
+     */
     class func fetchTweetsSinceDate(date: NSDate, forUser user: User, completion: ((error: NSError?, tweets: [Tweet]?) -> ())?) {
         completion?(error: nil, tweets: TweetProducer.tweetsSinceDate(date))
+    }
+    
+    /**
+     Posts a new tweet for a given user.
+     
+     - parameter tweet:      The tweet to post.
+     - parameter user:       The user tweeting the tweet.
+     - parameter completion: The completion closure that is called when the operation completes.
+     */
+    class func postTweet(tweet: Tweet, forUser user: User, completion: ((error: NSError?, tweet: Tweet?) -> ())?) {
+        // [BS] Jan 27, 2016
+        // We would normally hit the Twitter API at this point but we're simply going to fake it.
+        // This is obviously not proper, but in order to keep a consistent timeline, we're simply
+        // going to use the latest tweet we have in our database to set the created date of this future tweet.
+        let latest = TweetModelService.tweets().first
+        if let next = NSCalendar.currentCalendar().dateByAddingUnit(.Minute, value: 10, toDate: latest?.createdDate ?? NSDate(), options: .MatchNextTime) {
+            tweet.createdDate = next
+            tweet.id = Int(next.timeIntervalSince1970)
+            completion?(error: nil, tweet: tweet)
+        } else {
+            let userInfo = [NSLocalizedDescriptionKey: "Well, what can we say. Twitter is down at the moment."]
+            let error = NSError(domain: NSStringFromClass(TwitterNetworkService.self), code: 1, userInfo: userInfo)
+            completion?(error: error, tweet: nil)
+        }
     }
     
 }
