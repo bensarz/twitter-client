@@ -23,12 +23,12 @@ class UserTests: XCTestCase {
     
     func testDefaultValues() {
         let user = User()
-        XCTAssertEqual(user.email, "", "The has the wrong default email.")
-        XCTAssertEqual(user.firstName, "", "The has the wrong default first name.")
-        XCTAssertEqual(user.id, 0, "The has the wrong default id.")
-        XCTAssertEqual(user.lastName, "", "The has the wrong default last name.")
-        XCTAssertEqual(user.password, "", "The has the wrong default password.")
-        XCTAssertEqual(user.username, "", "The has the wrong default username.")
+        XCTAssertEqual(user.email, "", "The user has the wrong default email.")
+        XCTAssertEqual(user.firstName, "", "The user has the wrong default first name.")
+        XCTAssertEqual(user.id, 0, "The user has the wrong default id.")
+        XCTAssertEqual(user.lastName, "", "The user has the wrong default last name.")
+        XCTAssertEqual(user.password, "", "The user has the wrong default password.")
+        XCTAssertEqual(user.username, "", "The user has the wrong default username.")
     }
     
     func testInitPasswordUsername() {
@@ -67,10 +67,10 @@ class UserTests: XCTestCase {
     
     func testParsingKeys() {
         XCTAssertEqual(User.ParsingKey.Email.rawValue, "email", "The parsing key 'email' is invalid.")
-        XCTAssertEqual(User.ParsingKey.FirstName.rawValue, "first_name", "The parsing key 'email' is invalid.")
-        XCTAssertEqual(User.ParsingKey.ID.rawValue, "id", "The parsing key 'email' is invalid.")
-        XCTAssertEqual(User.ParsingKey.LastName.rawValue, "last_name", "The parsing key 'email' is invalid.")
-        XCTAssertEqual(User.ParsingKey.Username.rawValue, "username", "The parsing key 'email' is invalid.")
+        XCTAssertEqual(User.ParsingKey.FirstName.rawValue, "first_name", "The parsing key 'first_name' is invalid.")
+        XCTAssertEqual(User.ParsingKey.ID.rawValue, "id", "The parsing key 'id' is invalid.")
+        XCTAssertEqual(User.ParsingKey.LastName.rawValue, "last_name", "The parsing key 'last_name' is invalid.")
+        XCTAssertEqual(User.ParsingKey.Username.rawValue, "username", "The parsing key 'username' is invalid.")
     }
     
     func testRealm() {

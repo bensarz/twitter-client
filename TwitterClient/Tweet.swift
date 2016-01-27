@@ -36,7 +36,7 @@ class Tweet: Object {
 
 extension Tweet {
     
-    private enum ParsingKey: String {
+    enum ParsingKey: String {
         case Body           = "body"
         case CreatedDate    = "created_date"
         case FavouriteCount = "favourite_count"
