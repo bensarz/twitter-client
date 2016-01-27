@@ -27,6 +27,19 @@ class PersistenceController {
     // MARK: - CRUD Operations
     
     /**
+    Deletes every single object from the Realm.
+    */
+    class func deleteAllObjects() {
+        do {
+            try updateUsing { () -> () in
+                self.realm?.deleteAll()
+            }
+        } catch let error as NSError {
+            Log.error("Error: \(error.code) \(error.localizedDescription) \(error.userInfo)")
+        }
+    }
+    
+    /**
     Fetches the first object of type `T` in the Realm.
     
     - parameter type:      The type of object to fetch.

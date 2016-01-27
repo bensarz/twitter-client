@@ -46,6 +46,14 @@ class UserModelService: ModelService {
     }
     
     /**
+     Logs out all existing users and removes all their tweets.
+     The simple way to do this right now is to simply 💣 the database.
+     */
+    class func logAllExistingUsersOut() {
+        PersistenceController.deleteAllObjects()
+    }
+    
+    /**
      Fetches a user with a given username in the persistence store.
      
      - parameter username: The username of the user.

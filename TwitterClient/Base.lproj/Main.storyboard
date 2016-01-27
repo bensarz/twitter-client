@@ -50,7 +50,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="1p0-0w-j6n"/>
                     <connections>
-                        <segue destination="CKo-4o-cka" kind="presentation" identifier="SegueIDPresentLoginOptions" modalTransitionStyle="crossDissolve" id="Isi-um-N7o"/>
+                        <segue destination="CKo-4o-cka" kind="presentation" identifier="SegueIDPresentLoginOptions" id="Isi-um-N7o"/>
                         <segue destination="4aS-JU-hme" kind="show" identifier="SegueIDPresentTweets" id="ZNV-a4-EZD"/>
                     </connections>
                 </viewController>
@@ -83,7 +83,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="app-logo" translatesAutoresizingMaskIntoConstraints="NO" id="VT3-py-kUW">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="shared-app-logo" translatesAutoresizingMaskIntoConstraints="NO" id="VT3-py-kUW">
                                 <rect key="frame" x="270" y="28" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VT3-py-kUW" secondAttribute="height" multiplier="1:1" id="9ml-ly-xvh"/>
@@ -255,6 +255,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="JBF-FK-Jr5">
+                        <barButtonItem key="leftBarButtonItem" image="shared-logout-icon" id="qqx-nC-FNq">
+                            <connections>
+                                <action selector="logoutButtonTapped:" destination="4aS-JU-hme" id="3uI-FR-o8D"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="p8N-UK-0Ik">
                             <connections>
                                 <action selector="composeButtonTapped:" destination="4aS-JU-hme" id="sXs-vM-mo7"/>
@@ -272,9 +277,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="app-logo" width="100" height="100"/>
         <image name="shared-app-logo" width="100" height="100"/>
         <image name="shared-favourite-icon" width="768" height="768"/>
+        <image name="shared-logout-icon" width="22" height="22"/>
         <image name="shared-retweet-icon" width="768" height="768"/>
     </resources>
 </document>

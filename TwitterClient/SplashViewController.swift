@@ -54,6 +54,11 @@ class SplashViewController: UIViewController {
             let tweetsViewController = segue.destinationViewController as? TweetsViewController
             tweetsViewController?.tweets = TweetModelService.tweets()
             tweetsViewController?.user = user
+            
+            // [BS] Jan 27, 2016
+            // We have to set this variable to nil in order to allow for a propper logout.
+            // This is very bad. This mechanism needs to be revisited but for the sake of time...
+            user = nil
         default:
             break
         }
@@ -68,7 +73,7 @@ class SplashViewController: UIViewController {
                 since = nil == since ? NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: .MatchNextTime) : since
                 if let since = since {
                     TweetModelService.fetchNewTweetsSinceDate(since, forUser: user, completion: { (error, tweets) -> () in
-                        Log.debug("Error: \(error), Tweets: \(tweets)")
+                        Log.trace("Error: \(error), Tweets: \(tweets)")
                     })
                 }
             })

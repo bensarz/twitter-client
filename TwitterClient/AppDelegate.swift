@@ -6,6 +6,7 @@
 //  Copyright © 2016 Berzerker IO. All rights reserved.
 //
 
+import Log
 import UIKit
 
 @UIApplicationMain
@@ -18,7 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Application Lifecycle
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // [BS] Jan 27, 2016
+        // Simple logging configuration.
+        // If you do not already have it installed, please install the following Xcode plugins:
+        //   - Alcatraz: http://alcatraz.io
+        //   - KZLinkedConsole: https://github.com/krzysztofzablocki/KZLinkedConsole
+        //   - XcodeColors: https://github.com/robbiehanson/XcodeColors
+        Log.enabled   = true
+        Log.formatter = .Detailed
+        Log.minLevel  = .Debug // Change this value to .Trace to see all logs happening.
+        Log.theme     = .Yozora
         return true
     }
     

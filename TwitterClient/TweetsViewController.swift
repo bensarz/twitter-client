@@ -24,8 +24,17 @@ class TweetsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.setHidesBackButton(true, animated: false)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        super.viewWillDisappear(animated)
     }
     
     // MARK: - Actions
@@ -35,6 +44,11 @@ class TweetsViewController: UIViewController {
         let alertController = UIAlertController(title: "Not Available.", message: "This functionality will be available shortly.", preferredStyle: .Alert)
         alertController.addAction(okAction)
         presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func logoutButtonTapped(sender: UIBarButtonItem) {
+        UserModelService.logAllExistingUsersOut()
+        navigationController?.popToRootViewControllerAnimated(true)
     }
     
 }
@@ -68,7 +82,6 @@ extension TweetsViewController: UITableViewDelegate {
             attributes: [NSFontAttributeName: font],
             context: nil).size
         let height = 132 - 48 + box.height
-        Log.trace(height)
         return height
     }
     
