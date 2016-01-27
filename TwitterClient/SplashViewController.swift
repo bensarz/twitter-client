@@ -62,17 +62,17 @@ class SplashViewController: UIViewController {
     // MARK: - Data
     
     private func fetchNewTweets() {
-//        if let user = user {
-//            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), { () -> Void in
-//                var since = TweetModelService.tweets().first?.createdDate
-//                since = nil == since ? NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: .MatchNextTime) : since
-//                if let since = since {
-//                    TweetModelService.fetchNewTweetsSinceDate(since, forUser: user, completion: { (error, tweets) -> () in
-//                        Log.debug("Error: \(error), Tweets: \(tweets)")
-//                    })
-//                }
-//            })
-//        }
+        if let user = user {
+            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), { () -> Void in
+                var since = TweetModelService.tweets().first?.createdDate
+                since = nil == since ? NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: .MatchNextTime) : since
+                if let since = since {
+                    TweetModelService.fetchNewTweetsSinceDate(since, forUser: user, completion: { (error, tweets) -> () in
+                        Log.debug("Error: \(error), Tweets: \(tweets)")
+                    })
+                }
+            })
+        }
     }
     
 }
