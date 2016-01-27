@@ -15,12 +15,15 @@ class SplashViewController: UIViewController {
     
     var user: User?
     
-    // MARK: - View Lifecycle
+    // MARK: - Initialization
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         user = UserModelService.existingUser()
+        fetchNewTweets()
     }
+    
+    // MARK: - View Lifecycle
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -44,11 +47,32 @@ class SplashViewController: UIViewController {
             let loginViewController = segue.destinationViewController as? LoginViewController
             loginViewController?.completion = { (error, user) -> Void in
                 self.user = user
+                self.fetchNewTweets()
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
+        case SegueID.PresentTweets.rawValue:
+            let tweetsViewController = segue.destinationViewController as? TweetsViewController
+            tweetsViewController?.tweets = TweetModelService.tweets()
+            tweetsViewController?.user = user
         default:
             break
         }
+    }
+    
+    // MARK: - Data
+    
+    private func fetchNewTweets() {
+//        if let user = user {
+//            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0), { () -> Void in
+//                var since = TweetModelService.tweets().first?.createdDate
+//                since = nil == since ? NSCalendar.currentCalendar().dateByAddingUnit(.Day, value: -1, toDate: NSDate(), options: .MatchNextTime) : since
+//                if let since = since {
+//                    TweetModelService.fetchNewTweetsSinceDate(since, forUser: user, completion: { (error, tweets) -> () in
+//                        Log.debug("Error: \(error), Tweets: \(tweets)")
+//                    })
+//                }
+//            })
+//        }
     }
     
 }

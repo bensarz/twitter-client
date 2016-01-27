@@ -42,7 +42,6 @@ class UserModelService: ModelService {
                 Log.error("Error: \(error.code) \(error.localizedDescription) \(error.userInfo)")
                 completion?(error: error, user: user)
             }
-            
         }
     }
     
