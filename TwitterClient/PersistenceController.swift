@@ -14,14 +14,31 @@ class PersistenceController {
     
     // MARK: - Properties
     
+    /// This is the closure that is used to instantiate the Realm.
+    /// If this variable is not set, the default Realm will be used.
+    /// This is mainly used during testing so we can control the Realm.
+    static var builder: (()->Realm?)?
+    
     /// The default Realm object where everything is persisted.
     private class var realm: Realm? {
-        do {
-            return try Realm()
-        } catch let error as NSError {
-            Log.error("Error: \(error.code) \(error.localizedDescription) \(error.userInfo)")
+        let elseClosure = { () -> Realm? in
+            do {
+                return try Realm()
+            } catch let error as NSError {
+                Log.error("Error: \(error.code) \(error.localizedDescription) \(error.userInfo)")
+                return nil
+            }
         }
-        return nil
+        
+        if let builder = self.builder {
+            if let realm = builder() {
+                return realm
+            } else {
+                return elseClosure()
+            }
+        } else {
+            return elseClosure()
+        }
     }
     
     // MARK: - CRUD Operations
