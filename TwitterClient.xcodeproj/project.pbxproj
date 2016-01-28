@@ -19,6 +19,7 @@
 		D88A8BA21C5987F800C04CC0 /* NSDateExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A8BA11C5987F800C04CC0 /* NSDateExtensionsTests.swift */; };
 		D88A8BA41C598A2C00C04CC0 /* NSDateFormatterExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A8BA31C598A2C00C04CC0 /* NSDateFormatterExtensionsTests.swift */; };
 		D88A8BA61C598AF300C04CC0 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A8BA51C598AF300C04CC0 /* StringExtensionsTests.swift */; };
+		D88A8BA91C59915400C04CC0 /* PersistenceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A8BA81C59915400C04CC0 /* PersistenceControllerTests.swift */; };
 		D8CCD02C1C57E31F00D32C92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CCD02B1C57E31F00D32C92 /* AppDelegate.swift */; };
 		D8CCD0311C57E31F00D32C92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8CCD02F1C57E31F00D32C92 /* Main.storyboard */; };
 		D8CCD0331C57E31F00D32C92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8CCD0321C57E31F00D32C92 /* Assets.xcassets */; };
@@ -75,6 +76,7 @@
 		D88A8BA11C5987F800C04CC0 /* NSDateExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensionsTests.swift; sourceTree = "<group>"; };
 		D88A8BA31C598A2C00C04CC0 /* NSDateFormatterExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateFormatterExtensionsTests.swift; sourceTree = "<group>"; };
 		D88A8BA51C598AF300C04CC0 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		D88A8BA81C59915400C04CC0 /* PersistenceControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceControllerTests.swift; sourceTree = "<group>"; };
 		D8CCD0281C57E31F00D32C92 /* TwitterClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8CCD02B1C57E31F00D32C92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8CCD0301C57E31F00D32C92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -179,8 +181,9 @@
 		D88A8B9B1C596C8A00C04CC0 /* Test Suite */ = {
 			isa = PBXGroup;
 			children = (
-				D88A8BA01C59719900C04CC0 /* Extension Tests */,
 				D871F1BA1C59562D00FD496F /* Entity Tests */,
+				D88A8BA01C59719900C04CC0 /* Extension Tests */,
+				D88A8BA71C59913C00C04CC0 /* Persistence Tests */,
 				D88A8B991C596C7400C04CC0 /* Utilities Tests */,
 			);
 			name = "Test Suite";
@@ -194,6 +197,14 @@
 				D88A8BA51C598AF300C04CC0 /* StringExtensionsTests.swift */,
 			);
 			name = "Extension Tests";
+			sourceTree = "<group>";
+		};
+		D88A8BA71C59913C00C04CC0 /* Persistence Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D88A8BA81C59915400C04CC0 /* PersistenceControllerTests.swift */,
+			);
+			name = "Persistence Tests";
 			sourceTree = "<group>";
 		};
 		D8CCD01F1C57E31F00D32C92 = {
@@ -617,6 +628,7 @@
 				D88A8BA61C598AF300C04CC0 /* StringExtensionsTests.swift in Sources */,
 				D88A8BA41C598A2C00C04CC0 /* NSDateFormatterExtensionsTests.swift in Sources */,
 				D88A8B981C5963F900C04CC0 /* TweetTests.swift in Sources */,
+				D88A8BA91C59915400C04CC0 /* PersistenceControllerTests.swift in Sources */,
 				D88A8B9F1C596D7400C04CC0 /* TweetProducerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
