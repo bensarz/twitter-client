@@ -17,7 +17,7 @@ extension NSDateFormatter {
         return dateFormatter
     }
     
-    static var iso8601DateFormatter: NSDateFormatter {
+    static var ISO8601DateFormatter: NSDateFormatter {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = DateFormats.kISO8601
         dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")

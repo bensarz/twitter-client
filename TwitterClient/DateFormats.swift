@@ -11,7 +11,7 @@ import Foundation
 struct DateFormats {
     
     static var kDefault = "yyyy-MM-dd' 'HH:mm:ss"
-    static var kISO8601 = "yyyy-MM-dd'T'HH:mm:ss"
+    static var kISO8601 = "yyyy-MM-dd'T'HH:mm:ssZ"
     static var kSimple = "yyyy-MM-dd"
     
 }

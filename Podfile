@@ -20,6 +20,9 @@ end
 
 target 'TwitterClientTests' do
 
+  pod 'Log'
+  pod 'RealmSwift'
+
 end
 
 target 'TwitterClientUITests' do

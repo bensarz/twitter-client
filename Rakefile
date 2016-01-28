@@ -57,7 +57,8 @@ task :pod_reset => [:pod_clean, :pod_lock_clean, :pod_install]
 desc "Runs all tests."
 task :test do
   puts "Compiling the Xcode project".colorize(:green)
-  sh "xcodebuild -workspace TwitterClient.xcworkspace -scheme TwitterClient -sdk iphonesimulator -configuration Debug clean test | xcpretty -c"
+  sh "xcodebuild -workspace TwitterClient.xcworkspace -scheme TwitterClient -sdk iphonesimulator9.2 -destination 'platform=iOS Simulator,name=iPhone 6S Plus'  -configuration Debug clean test | xcpretty -r html"
+  puts "An HTML report has been created for you @ './build/reports/tests.html'".colorize(:yellow)
 end
 
 desc "Bumps the build number."
