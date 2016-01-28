@@ -166,9 +166,9 @@ class PersistenceControllerTests: XCTestCase {
             let persistedUserWithID = try PersistenceController.object(User.self, withPredicate: predicateWithID)
             XCTAssertEqual(user1.id, persistedUserWithID?.id, "The user that was fetched is not the expected user.")
             
-            let predicateWithEmail = NSPredicate(format: "email == %@", "email2@domain.tld")
+            let predicateWithEmail = NSPredicate(format: "email == %@", "courriel2@domain.tld")
             let persisteduserWithBody = try PersistenceController.object(User.self, withPredicate: predicateWithEmail)
-            XCTAssertEqual(user2.email, persisteduserWithBody?.email, "The user that was fetched is not the expected user.")
+            XCTAssertEqual(user3.email, persisteduserWithBody?.email, "The user that was fetched is not the expected user.")
         } catch let error as NSError {
             XCTFail("Error: \(error.code) \(error.localizedDescription) \(error.userInfo)")
         }
